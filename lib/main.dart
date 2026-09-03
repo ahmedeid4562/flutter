@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // استيراد ملف الشاشة الرئيسية
-
+import 'home_screen.dart';
 void main() {
   runApp(const MyApp());
 }

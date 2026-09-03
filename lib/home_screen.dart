@@ -6,130 +6,177 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Image.asset("assets/images/Group.png"),
-
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset("assets/icons/location.png"),
-              const SizedBox(width: 5),
-              Text(
-                'Dhaka, Banasree',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF4C4F4D),
-                ),
-              ),
-            ],
-          ),
-
-          Container(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: const Color(0xFFF2F3F2),
-            ),
-            child: Row(
-              spacing: 10,
+            child: Column(
               children: [
-                Image.asset("assets/icons/search.png"),
-                Text(
-                  "Search Store",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF7C7C7C),
+                Image.asset(
+                  "assets/images/Group.png",
+                ),
+
+                const SizedBox(height: 20),
+
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      "assets/icons/location.png",
+                      width: 20,
+                      height: 20,
+                    ),
+
+                    const SizedBox(width: 5),
+
+                    const Text(
+                      'Dhaka, Banasree',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF4C4F4D),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: const Color(0xFFF2F3F2),
                   ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "assets/icons/search.png",
+                        width: 20,
+                        height: 20,
+                      ),
+
+                      const SizedBox(width: 10),
+
+                      const Text(
+                        "Search Store",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF7C7C7C),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                Image.asset(
+                  "assets/images/banner.png",
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+
+                const SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ItemCard(
+                      image:
+                          "assets/images/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png",
+                      price: "\$4.99",
+                      title: "Organic Bananas",
+                      description: "7pcs, Priceg",
+                    ),
+
+                    ItemCard(
+                      image: "assets/images/Vector.png",
+                      title: "Red Apple",
+                      description: "1kg, Priceg",
+                      price: "\$4.99",
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-
-          Image.asset("assets/images/banner.png"),
-
-          Row(
-            mainAxisAlignment: .spaceAround,
-            children: [ItemCard(
-              image: "assets/images/92f1ea7dcce3b5d06cd1b1418f9b9413 3.png",
-              price:"\$4.99",
-              title: "Organic Bananas",
-              description:"7pcs, Priceg" ,),
-             ItemCard(
-              image:"assets/images/Vector.png" ,
-             title:"Red Apple" ,
-             description: "1kg, Priceg",
-              price:"\$4.99" ,
-              ),
-
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
 class ItemCard extends StatelessWidget {
-   ItemCard({super.key,required this.image,required this.title,required this.description,required this.price});
-   String image;
-   String title;
-   String description;
-   String price;
+  final String image;
+  final String title;
+  final String description;
+  final String price;
+
+  const ItemCard({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.description,
+    required this.price,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 175,
       height: 250,
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Color(0xffE2E2E2),
+          color: const Color(0xffE2E2E2),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            image,
-            width: 110,
-            height: 62,
-            fit: BoxFit.contain,
+          Center(
+            child: Image.asset(
+              image,
+              width: 110,
+              height: 62,
+              fit: BoxFit.contain,
+            ),
           ),
 
-          SizedBox(height: 33),
+          const SizedBox(height: 33),
 
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Color(0xff181725),
             ),
           ),
 
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
 
           Text(
-           description,
-            style: TextStyle(
+            description,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w400,
               color: Color(0xff7c7c7c),
             ),
           ),
 
-          Spacer(),
+          const Spacer(),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 price,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff181725),
@@ -141,8 +188,8 @@ class ItemCard extends StatelessWidget {
                 height: 45,
                 child: FloatingActionButton(
                   onPressed: () {},
-                  backgroundColor: Color(0xff53B175),
-                  child: Icon(
+                  backgroundColor: const Color(0xff53B175),
+                  child: const Icon(
                     Icons.add,
                     color: Colors.white,
                     size: 30,
@@ -156,3 +203,4 @@ class ItemCard extends StatelessWidget {
     );
   }
 }
+
