@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+
+import 'screens/login_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,12 +12,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Demo App Flutter",
-      theme: ThemeData(),
-      darkTheme: ThemeData(),
-      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      title: 'Grocery App',
+
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: const Color(0xff53B175),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff53B175),
+        ),
+        useMaterial3: true,
+      ),
+
+      // بداية التطبيق من Login
+      home: const LoginScreen(),
     );
   }
 }
