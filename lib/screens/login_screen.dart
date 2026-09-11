@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'main_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -16,10 +17,11 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscurePassword = true;
 
   @override
-  void dispose() {   emailController.dispose();   passwordController.dispose();   super.dispose(); }
+  void dispose() {  emailController.dispose();  passwordController.dispose();  super.dispose();}
 
   void login() {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+    if (emailController.text.isEmpty ||
+        passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Please enter email and password"),
@@ -31,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const MainScreen(), // تم ضبطها بـ const هنا بنجاح وبدون أي إيرور
+        builder: (context) => const MainScreen(),
       ),
     );
   }
@@ -52,12 +54,14 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          keyboardDismissBehavior:
+              ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 60),
+
               Center(
                 child: Image.asset(
                   "assets/images/Group.png",
@@ -65,7 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 70,
                 ),
               ),
+
               const SizedBox(height: 50),
+
               const Text(
                 "Login",
                 style: TextStyle(
@@ -74,7 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xff181725),
                 ),
               ),
+
               const SizedBox(height: 10),
+
               const Text(
                 "Enter your email and password",
                 style: TextStyle(
@@ -82,7 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xff7C7C7C),
                 ),
               ),
+
               const SizedBox(height: 35),
+
               const Text(
                 "Email",
                 style: TextStyle(
@@ -91,7 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xff7C7C7C),
                 ),
               ),
+
               const SizedBox(height: 8),
+
+              // Email
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -99,10 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: const InputDecoration(
                   hintText: "Enter your email",
                   border: UnderlineInputBorder(),
-                  suffixIcon: Icon(Icons.email_outlined),
                 ),
               ),
+
               const SizedBox(height: 25),
+
               const Text(
                 "Password",
                 style: TextStyle(
@@ -111,7 +125,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xff7C7C7C),
                 ),
               ),
+
               const SizedBox(height: 8),
+
+              // Password
               TextField(
                 controller: passwordController,
                 keyboardType: TextInputType.visiblePassword,
@@ -127,12 +144,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                     icon: Icon(
-                      obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                     ),
                   ),
                 ),
               ),
+
               const SizedBox(height: 15),
+
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -146,7 +167,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 20),
+
               SizedBox(
                 width: double.infinity,
                 height: 55,
@@ -168,7 +191,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 25),
+
               Center(
                 child: GestureDetector(
                   onTap: openSignUp,
@@ -192,6 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 30),
             ],
           ),

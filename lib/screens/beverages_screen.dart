@@ -78,10 +78,7 @@ class _BeveragesScreenState extends State<BeveragesScreen> {
   }
 
   @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
+   void dispose() {     searchController.dispose();   super.dispose(); }
 
   @override
   Widget build(BuildContext context) {
