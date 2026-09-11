@@ -8,14 +8,23 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool obscurePassword = true;
 
+  static const green = Color(0xff53B175);
+  static const dark = Color(0xff181725);
+  static const grey = Color(0xff7C7C7C);
+
   @override
-  void dispose() {  usernameController.dispose(); emailController.dispose(); passwordController.dispose();super.dispose(); }
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   void signUp() {
     if (usernameController.text.isEmpty ||
@@ -32,6 +41,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.pop(context);
   }
 
+  InputDecoration input(
+    String hint, {
+    IconData? icon,
+    Color? iconColor,
+  }) {
+    return InputDecoration(
+      hintText: hint,
+      border: const UnderlineInputBorder(),
+      suffixIcon: icon == null
+          ? null
+          : Icon(
+              icon,
+              color: iconColor,
+            ),
+    );
+  }
+
+  bool isValidEmail(String email) {
+    return RegExp(
+      r'^[\w\.-]+@[\w\.-]+\.\w+$',
+    ).hasMatch(email);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,97 +71,82 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          keyboardDismissBehavior:
+              ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 60),
+
+              // Logo
               Center(
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xff53B175).withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.person_add_outlined,
-                    size: 40,
-                    color: Color(0xff53B175),
-                  ),
+                child: Image.asset(
+                  "assets/images/Group.png",
+                  width: 70,
+                  height: 70,
                 ),
               ),
+
               const SizedBox(height: 40),
+
               const Text(
                 "Sign Up",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xff181725),
+                  color: dark,
                 ),
               ),
+
               const SizedBox(height: 10),
+
               const Text(
                 "Enter your credentials to continue",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xff7C7C7C),
+                  color: grey,
                 ),
               ),
+
               const SizedBox(height: 35),
-              const Text(
-                "Username",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff7C7C7C),
-                ),
-              ),
-              const SizedBox(height: 8),
+
+              _label("Username"),
+
               TextField(
                 controller: usernameController,
                 textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  hintText: "Enter your username",
-                  border: UnderlineInputBorder(),
-                  suffixIcon: Icon(Icons.person_outline),
+                decoration: input(
+                  "Enter your username",
                 ),
               ),
+
               const SizedBox(height: 25),
-              const Text(
-                "Email",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff7C7C7C),
-                ),
-              ),
-              const SizedBox(height: 8),
+
+              _label("Email"),
+
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  hintText: "Enter your email",
-                  border: UnderlineInputBorder(),
-                  suffixIcon: Icon(Icons.email_outlined),
+                onChanged: (_) => setState(() {}),
+                decoration: input(
+                  "Enter your email",
+                  icon: isValidEmail(emailController.text)
+                      ? Icons.check
+                      : null,
+                  iconColor: green,
                 ),
               ),
+
               const SizedBox(height: 25),
-              const Text(
-                "Password",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff7C7C7C),
-                ),
-              ),
-              const SizedBox(height: 8),
+
+              _label("Password"),
+
               TextField(
                 controller: passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
                 obscureText: obscurePassword,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   hintText: "Enter your password",
                   border: const UnderlineInputBorder(),
@@ -147,14 +164,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 35),
+
               SizedBox(
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
                   onPressed: signUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff53B175),
+                    backgroundColor: green,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
@@ -169,24 +188,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 25),
+
               Center(
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: RichText(
-                    text: const TextSpan(
+                  onTap: () => Navigator.pop(context),
+                  child: const Text.rich(
+                    TextSpan(
                       text: "Already have an account? ",
                       style: TextStyle(
-                        color: Color(0xff181725),
+                        color: dark,
                         fontSize: 14,
                       ),
                       children: [
                         TextSpan(
                           text: "Log In",
                           style: TextStyle(
-                            color: Color(0xff53B175),
+                            color: green,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -195,6 +214,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 30),
             ],
           ),
@@ -202,5 +222,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-}
 
+  Widget _label(String text) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: grey,
+          ),
+        ),
+        const SizedBox(height: 8),
+      ],
+    );
+  }
+}
